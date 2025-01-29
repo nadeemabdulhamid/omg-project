@@ -1,0 +1,292 @@
+<!doctype html>
+<!--
+    OMG Project
+    Copyright (c) 2025 Nadeem Abdul Hamid
+    License: MIT
+
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>OMG Media Goods - Catalog</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
+            rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
+            crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" 
+            integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" 
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
+  </head>
+  <body>
+    <header class="sticky-top">
+      <div class="p-3 text-center bg-white border-bottom">
+        <div class="container">
+          <div class="row">
+            <!-- left -->
+            <div class="col-3">
+              <h1>😮 OMG</h1>
+              <div>OMG Media Goods</div>
+            </div>
+            <!-- right -->
+            <div class="col-9">
+              <div class="d-flex float-end">
+                <a href="cart.html" class="border rounded py-1 px-3 nav-link d-flex align-items-center"> 
+                <i class="fas fa-shopping-cart m-1 me-md-2"></i>
+                <p class="d-none d-md-block mb-0">My cart 
+                  <span class="badge ms-2 text-bg-secondary float-end" id="cart-count">0</span></p> </a>
+              </div>              
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-primary mb-4">
+        <div class="container py-2">
+          <div class="row">
+            <div class="col-4">
+              <h3 class="text-white mt-2">Product Catalog</h3>
+            </div>
+            <div class="col-8">
+              <div class="d-flex float-end">
+                <div class="input-group float-center">
+                  <input type="search" id="searchform" class="form-control" placeholder="search...">
+                  <button type="button" class="btn btn-primary shadow-0" id="searchformbutton">
+                    <i class="fas fa-search"></i>
+                  </button>
+                </div>                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section>
+      <div class="container">
+        <div class="row">
+
+          <!-- sidebar -->
+           <div class="col-lg-3 mb-5">
+            <ul class="list-group">
+
+              <!-- media type filter -->
+              <li class="list-group-item bg-info text-black fs-4">
+                <span data-bs-toggle="collapse" href="#media-filter" role="button" aria-expanded="false" aria-controls="media-filter">
+                  <i class="fa-solid fa-angles-down"></i> Media Type
+                </span>
+              </li>
+
+              <li class="list-group-item pb-5 collapse show" id="media-filter">
+
+                <div class="form-check">
+                  <input checked class="btn-check" type="checkbox" value="" id="all-media-check" autocomplete="off">
+                  <label class="btn btn-outline-success col-12 text-start" for="all-media-check">
+                    <i class="fa-solid fa-chevron-down"></i> All
+                    <span class="badge ms-4 text-bg-secondary float-end" id="all-media-count"></span>
+                  </label>
+                </div>
+
+                <div class="form-check">
+                  <input checked class="btn-check" type="checkbox" value="" id="audio-media-check" autocomplete="off">
+                  <label class="btn btn-outline-primary col-12 text-start" for="audio-media-check">
+                    <i class="fa-solid fa-file-audio"></i> Audio
+                    <span class="badge ms-4 text-bg-secondary float-end" id="audio-media-count"></span>
+                  </label>
+                </div>
+
+                <div class="form-check">
+                  <input checked class="btn-check" type="checkbox" value="" id="print-media-check" autocomplete="off">
+                  <label class="btn btn-outline-primary col-12 text-start" for="print-media-check">
+                    <i class="fa-solid fa-book-open-reader"></i> Print      
+                    <span class="badge ms-4 text-bg-secondary float-end" id="print-media-count"></span>
+                  </label>
+                </div>
+
+                <div class="form-check">
+                  <input checked class="btn-check" type="checkbox" value="" id="video-media-check" autocomplete="off">
+                  <label class="btn btn-outline-primary col-12 text-start" for="video-media-check">
+                    <i class="fa-solid fa-film"></i> Video
+                    <span class="badge ms-4 text-bg-secondary float-end" id="video-media-count"></span>
+                  </label>
+                </div>
+
+              </li>
+              <!-- /media type filter -->
+
+              <!-- price filter -->
+              <li class="list-group-item bg-info text-black fs-4">
+                <span data-bs-toggle="collapse" href="#price-filter" role="button" aria-expanded="false" aria-controls="price-filter">
+                  <i class="fa-solid fa-angles-down"></i> Price
+                </span>
+              </li>
+
+              <li class="list-group-item pb-5 collapse" id="price-filter">
+                <div class="row">
+                  <div class="col-6 form-floating">
+                    <input type="number" min="-1" max="1" step="1" class="form-control" id="minPrice" placeholder="-1" value="">
+                    <label for="minPrice">Minimum</label>
+                  </div>
+                  <div class="col-6 form-floating">
+                    <input type="number" min="-1" max="1" step="1" class="form-control" id="maxPrice" placeholder="-1" value="">
+                    <label for="maxPrice">Maximum</label>
+                  </div>
+                </div>
+              </li>
+              <!-- /price filter -->
+
+              <!-- year filter -->
+              <li class="list-group-item bg-info text-black fs-4">
+                <span data-bs-toggle="collapse" href="#year-filter" role="button" aria-expanded="false" aria-controls="year-filter">
+                  <i class="fa-solid fa-angles-down"></i> Year
+                </span>
+              </li>
+
+              <li class="list-group-item pb-5 collapse" id="year-filter">
+                <div class="row">
+                  <div class="col-6 form-floating">
+                    <input type="number" min="-1" max="1" step="1" class="form-control" id="minYear" placeholder="-1" value="">
+                    <label for="minYear">Minimum</label>
+                  </div>
+                  <div class="col-6 form-floating">
+                    <input type="number" min="-1" max="1" step="1" class="form-control" id="maxYear" placeholder="-1" value="">
+                    <label for="maxYear">Maximum</label>
+                  </div>
+                </div>
+              </li>
+              <!-- /year filter -->
+
+              <!-- tag filter -->
+              <li class="list-group-item bg-info text-black fs-4">
+                Tags
+              </li>
+
+              <li class="list-group-item pb-5">
+                <div id="current-tags">
+                </div>
+                  
+                <div class="mt-4">
+                  <div class="m-2">
+                  <input class="form-control" id="tagsearch" placeholder="Type to search...">
+                  </div>
+                  <div id="filter-tags" class="mt-3">    
+                  </div>
+                  <div class="mt-3">
+                    <button class="btn btn-secondary" id="show-all-tags">Show all tags</button>
+                  </div>
+                </div>
+              </li>
+              <!-- /tag filter -->
+
+            </ul>                            
+           </div>
+           <!-- sidebar -->
+
+          <!-- content -->
+          <div class="col-lg-9 mb-5">
+            <div class="text-end fw-bold border p-2 mb-2">Sort by:
+              <select class="sort-select" aria-label="Sort select" id="omg-sort-select">
+                <option selected></option>
+                <option value="title,asc">Title</option>
+                <option value="price,asc">Price (low to high)</option>
+                <option value="price,desc">Price (high to low)</option>
+                <option value="year,asc">Year (low to high)</option>
+                <option value="year,desc">Year (high to low)</option>
+                <option value="rating,asc">Rating (low to high)</option>
+                <option value="rating,desc">Rating (high to low)</option>
+              </select>
+              
+            </div>
+
+            <div id="omg-item-cards">
+              <!-- CARDS TEMPLATE INSERT HERE -->
+            </div>
+          </div>
+          <!-- content -->
+        </div>
+      </div>
+    </section>
+
+    <footer>
+
+    </footer>
+
+
+
+    <!-- ####################################################################################################################################  -->
+    <!-- ####################################################################################################################################  -->
+    <!-- ####################################################################################################################################  -->
+    <!-- CARD TEMPLATES AND PIECES -->
+
+    <template id="tag-filter-select-template">
+      <button class="btn btn-outline-primary text-start" type="button"> 
+        <span class="badge ms-2 text-bg-secondary float-end"></span>
+       </button>
+    </template>
+
+    <template id="applied-tag-template">
+      <span class="badge bg-primary m-1 p-1 text-nowrap fs-6 fw-normal"> 
+        <button type="button" class="btn-close bg-white ms-2" aria-label="Close"></button> 
+      </span>
+    </template>
+
+    <template id="item-card-tag-template">
+      <span class="badge bg-info"><!-- TAG TEXT --></span>
+    </template>
+
+    <template id="item-card-print-icon-template"><i class="fa-solid fa-book-open-reader"></i></template>
+    <template id="item-card-audio-icon-template"><i class="fa-solid fa-file-audio"></i></template>
+    <template id="item-card-video-icon-template"><i class="fa-solid fa-film"></i></template>
+    <template id="item-card-star-template"><i class="            text-warning"></i></template> <!-- add the star classes -->
+    <template id="item-card-price-template"><strong></strong></template>
+    <template id="item-card-price-discount-template"><strong></strong> <span class="text-muted"><s></s> </span></template>
+
+    <template id="item-card-template">
+      <div class="card mb-3">
+        <div class="row g-0">
+          <div class="col-md-2 omg-preview-image">
+            <!-- IMAGE -->
+            <img src="#" alt="#" class="bd-placeholder-img img-fluid rounded-top" width="100%" height="180" preserveAspectRatio="xMidYMid slice" >
+          </div>
+          <div class="col-md-7">
+            <div class="card-body">
+              <h5 class="card-title omg-item-title"><!-- CARD TITLE --></h5>
+              <h6 class="card-subtitle omg-item-subtitle"><!-- CARD SUBTITLE --></h6>
+              <p class="card-text text-muted omg-item-info"><!-- ITEM INFO --></p>
+              <p class="card-text omg-item-description">
+                <span class="omg-short"><!-- ITEM DESCRIPTION (short/full) --> <a href="#">View More</a></span>
+                <span class="omg-full d-none"> <a href="#">View Less</a></span>  <!-- toggle d-none -->
+              </p>
+              <p class="card-text omg-item-tags"><!-- #use item-card-tag-template --></p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="text-end me-3 fs-2 omg-item-type-icon"></div>
+            <div>
+              <small><span class="omg-item-rating">
+              </span></small>
+          </div>
+          <div class="omg-item-price-line">
+            <!-- <strong>$16.00</strong> <span class="text-muted"><s>$20.00</s> (20% off)</span> -->
+          </div>
+          <div>&nbsp;</div>
+          <div>
+            <button type="button" class="btn btn-success omg-add-to-cart d-none">Add to cart</button>
+          </div>
+            
+          </div>
+        </div>
+        <div class="card-footer">
+
+        </div>            
+      </div>  
+    </template>
+
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
+            crossorigin="anonymous"></script>
+    <script src="common.js"></script>
+    <script src="omg.js"></script>
+  </body>
+</html>

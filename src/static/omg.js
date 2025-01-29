@@ -335,22 +335,6 @@
 
   
     /**
-     * Puts together a subtitle line for the item card based on the item type.
-     * @param {JSON} itemdata 
-     * @returns String
-     */
-    function getSubtitleLine(itemdata){ 
-        const itemType = itemdata["type"];
-        let stuff;
-        if (itemType == "print") { stuff = itemdata["author"]; }
-        else if (itemType == "audio") { stuff = itemdata["artist"]; }
-        else if (itemType == "video") { stuff = `Starring: ${itemdata["starring"]}; Directed by: ${itemdata["directed-by"]}`; }
-        
-        return stuff;
-    }
-    
-
-    /**
      * Appends a new item card to the list of items.
      * @param {JSON} itemdata 
      */
@@ -454,5 +438,20 @@
         document.getElementById("omg-item-cards").appendChild(itemCard);
     }
 
-    
+
+    /**
+     * Puts together a subtitle line for the item card based on the item type.
+     * @param {JSON} itemdata 
+     * @returns String
+     */
+    function getSubtitleLine(itemdata){ 
+        const itemType = itemdata["type"];
+        let stuff;
+        if (itemType == "print") { stuff = itemdata["author"]; }
+        else if (itemType == "audio") { stuff = itemdata["artist"]; }
+        else if (itemType == "video") { stuff = `Starring: ${itemdata["starring"]}; Directed by: ${itemdata["directed-by"]}`; }
+        
+        return stuff;
+    }
+        
 })();

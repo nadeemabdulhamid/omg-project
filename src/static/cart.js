@@ -109,17 +109,19 @@
         itemCard.querySelector(".omg-item-info").textContent = itemdata["info-line"];
 
         // image
+        let img = itemCard.querySelector(".omg-preview-image > img");
         if ("image" in itemdata) {
-            let img = itemCard.querySelector(".omg-preview-image > img");
             img.src = itemdata["image"];
             img.alt = "Image of " + itemdata["title"];
+        } else {
+            img.classList.add("d-none");
         }
 
         // description
+        let descrip = itemCard.querySelector(".omg-item-description");
+        let shortSpan = descrip.querySelector(".omg-short");
+        let fullSpan = descrip.querySelector(".omg-full");
         if ("description-short" in itemdata && "description-full" in itemdata) {
-            let descrip = itemCard.querySelector(".omg-item-description");
-            let shortSpan = descrip.querySelector(".omg-short");
-            let fullSpan = descrip.querySelector(".omg-full");
             shortSpan.prepend(itemdata["description-short"]);
             fullSpan.prepend(itemdata["description-full"]);
             
@@ -131,6 +133,10 @@
 
             shortSpan.querySelector("a").addEventListener("click", toggleSpans);
             fullSpan.querySelector("a").addEventListener("click", toggleSpans);
+        } else {
+            shortSpan.querySelector("a").classList.add("d-none");
+            fullSpan.querySelector("a").classList.add("d-none");
+
         }
 
         // tags
@@ -184,21 +190,5 @@
         document.getElementById("omg-cart-list").appendChild(itemCard);
     }
 
-
-    /**
-     * Puts together a subtitle line for the item card based on the item type.
-     * @param {JSON} itemdata 
-     * @returns String
-     */
-        function getSubtitleLine(itemdata){ 
-            const itemType = itemdata["type"];
-            let stuff;
-            if (itemType == "print") { stuff = itemdata["author"]; }
-            else if (itemType == "audio") { stuff = itemdata["artist"]; }
-            else if (itemType == "video") { stuff = `Starring: ${itemdata["starring"]}; Directed by: ${itemdata["directed-by"]}`; }
-            
-            return stuff;
-        }
-    
 
 })();

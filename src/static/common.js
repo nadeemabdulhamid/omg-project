@@ -25,3 +25,26 @@ async function fetchJSON(url, params = {}) {
         console.error(error.message);
     }    
 }
+
+
+/**
+ * Puts together a subtitle line for the item card based on the item type.
+ * @param {JSON} itemdata 
+ * @returns String
+ */
+function getSubtitleLine(itemdata) { 
+    const itemType = itemdata["type"];
+    let stuff = "";
+    if (itemType == "print" && "author" in itemdata) { stuff = itemdata["author"]; }
+    else if (itemType == "audio" && "artist" in itemdata) { stuff = itemdata["artist"]; }
+    else if (itemType == "video") { 
+        if ("starring" in itemdata) {
+            stuff = `Starring: ${itemdata["starring"]}` 
+        }
+        if ("directed-by" in itemdata) { 
+            stuff += `; Directed by: ${itemdata["directed-by"]}`; 
+        }
+    }
+    
+    return stuff;
+}

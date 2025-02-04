@@ -44,9 +44,7 @@ public class APIHandler implements HttpHandler {
                 Utils.sendJSON(t, server.getHandlerFor(service).getResponse(server.constructPredicate(params)));			
             } else if (service.equals("price-range") || service.equals("year-range")) {
                 Utils.sendJSON(t, server.getHandlerFor(service).getResponse(server.constructPredicate(params, true)));
-            }
-
-            else if (service.equals("tags")) {
+            } else if (service.equals("tags")) {
                 String tagsearch = (String)params.getOrDefault("tag-search", "");
                 int limit = Integer.parseInt((String)params.getOrDefault("tag-limit", "-1"));
                 Utils.sendJSON(t, server.getHandlerFor(service).getResponse(server.constructPredicate(params), tagsearch, limit));
@@ -60,8 +58,7 @@ public class APIHandler implements HttpHandler {
                     || service.equals("cart-remove-coupon")) {
                 String code = (String)params.getOrDefault("code", "");
                 Utils.sendJSON(t, server.getHandlerFor(service).getResponse(code));
-            }				
-            else {
+            } else {
                 String response = " service: " + service + " params: " + params;
                 Utils.sendJSON(t, response);
             }

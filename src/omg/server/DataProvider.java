@@ -69,18 +69,24 @@ public class DataProvider {
 			if (constrsMap.containsKey(type)) {		// found an installed constructor for this type
 				DataConstructor cp = constrs.get(type);  // need the field names to extract
 				Constructor cn = constrsMap.get(type);   // get the constructor itself
-				Object[] args =  Stream.of(cp.fields).map(f -> { 
-					Object v = j.get(f);
-					//System.out.println(v + " : " + v.getClass());
-					if (v.getClass().equals(JSONArray.class)) {
-						return ((JSONArray)v).toList();	
-					} else if (v.getClass().equals(BigDecimal.class) && dataSchema.get(f).equals(doubleKlass)) {
-						return ((BigDecimal)v).doubleValue();
-					} else {
-						return j.get(f);
-					}
-				})
-						.toArray();
+				Object[] args;
+				
+				if (cp.fields.length == 0) {
+					args = new Object[] {j};
+				} else {
+					args =  Stream.of(cp.fields).map(f -> { 
+						Object v = j.get(f);
+						//System.out.println(v + " : " + v.getClass());
+						if (v.getClass().equals(JSONArray.class)) {
+							return ((JSONArray)v).toList();	
+						} else if (v.getClass().equals(BigDecimal.class) && dataSchema.get(f).equals(doubleKlass)) {
+							return ((BigDecimal)v).doubleValue();
+						} else {
+							return j.get(f);
+						}
+					}).toArray();
+				}	
+				
 				try {
 					ts.add((T)cn.newInstance(args));
 				} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
@@ -164,7 +170,13 @@ public class DataProvider {
 		}
 
 		DataConstructor cp = constrs.get(type);
-		Class[] paramTypes = Stream.of(cp.fields).map(f ->  dataSchema.get(f)).toArray(Class[]::new);
+		Class[] paramTypes;
+
+		if (cp.fields.length == 0) {
+			paramTypes = new Class[] {JSONObject.class};
+		} else {
+			paramTypes = Stream.of(cp.fields).map(f ->  dataSchema.get(f)).toArray(Class[]::new);
+		}
 
 		try {
 			Constructor k = cp.klass.getConstructor(paramTypes);

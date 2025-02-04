@@ -175,11 +175,25 @@
      * then the value is set to the min or max value, otherwise it is set to an empty string.
      * @param {boolean} retainAndFixInvalid whether to retain the value and set it to the min/max or just clear it
      */
-    function validateRanges(retainAndFixInvalid) {
-        if (minPriceInp.value != "" && Number(minPriceInp.value) < Number(minPriceInp.min)) { minPriceInp.value = retainAndFixInvalid ? minPriceInp.min : ""; loadProducts(); }
-        if (maxPriceInp.value != "" && Number(maxPriceInp.value) > Number(maxPriceInp.max)) { maxPriceInp.value = retainAndFixInvalid ? maxPriceInp.max : ""; loadProducts(); }
-        if (minYearInp.value != "" && Number(minYearInp.value) < Number(minYearInp.min)) { minYearInp.value = retainAndFixInvalid ? minYearInp.min : ""; loadProducts(); }
-        if (maxYearInp.value != "" && Number(maxYearInp.value) > Number(maxYearInp.max)) { maxYearInp.value = retainAndFixInvalid ? maxYearInp.max : ""; loadProducts(); }
+    function validateRanges(retainAndFixInvalid, forceReload) {
+        needToReload = forceReload;
+        if (minPriceInp.value != "" && Number(minPriceInp.value) < Number(minPriceInp.min)) { minPriceInp.value = retainAndFixInvalid ? minPriceInp.min : ""; needToReload = true; }
+        if (minPriceInp.value != "" && Number(minPriceInp.value) > Number(minPriceInp.max)) { minPriceInp.value = retainAndFixInvalid ? minPriceInp.min : ""; needToReload = true; }
+
+        if (maxPriceInp.value != "" && Number(maxPriceInp.value) > Number(maxPriceInp.max)) { maxPriceInp.value = retainAndFixInvalid ? maxPriceInp.max : ""; needToReload = true; }
+        if (minYearInp.value != "" && Number(minYearInp.value) < Number(minYearInp.min)) { minYearInp.value = retainAndFixInvalid ? minYearInp.min : ""; needToReload = true; }
+        if (maxYearInp.value != "" && Number(maxYearInp.value) > Number(maxYearInp.max)) { maxYearInp.value = retainAndFixInvalid ? maxYearInp.max : ""; needToReload = true; }
+        
+        if (minPriceInp.value != "" && maxPriceInp.value != "" && Number(minPriceInp.value) > Number(maxPriceInp.value)) {
+            minPriceInp.value = maxPriceInp.value; 
+            needToReload = true;
+        }
+        if (minYearInp.value != "" && maxYearInp.value != "" && Number(minYearInp.value) > Number(maxYearInp.value)) {
+            minYearInp.value = maxYearInp.value;
+            needToReload = true;
+        }
+
+        if (needToReload) { loadProducts(); }
     }
 
 
@@ -259,7 +273,7 @@
      * Invoke loadProducts() whenever there is any change in the price or year range inputs.
      */
     function setupPriceYearFilter() {
-        f = () => { validateRanges(true); loadProducts(); };
+        f = () => { validateRanges(true, true); };
         minPriceInp.addEventListener("change", f);
         maxPriceInp.addEventListener("change", f);
         minYearInp.addEventListener("change", f);

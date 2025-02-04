@@ -18,7 +18,7 @@ import java.util.function.Predicate;
  */
 @FunctionalInterface
 @SuppressWarnings({ "rawtypes" })
-interface RequestCatalogWithSortHandler extends RequestHandler {
+public interface RequestCatalogWithSortHandler extends RequestHandler {
 	@Override default String getResponse() { throw new RuntimeException("unimplemented"); }
 
 	String getResponse(Predicate f, String sortfield, boolean ascending);

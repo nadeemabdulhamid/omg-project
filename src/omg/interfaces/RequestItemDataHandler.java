@@ -9,7 +9,7 @@ package omg.interfaces;
  * Response to the "/api/item-data?id=<id>" request, where the id query parameter
  * is passed to the response method.
  * 
- * Should return a JSON object representing the item with the given id.
+ * Should return a string representation of a JSON object for the item with the given id.
  */
 
 @FunctionalInterface

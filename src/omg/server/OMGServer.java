@@ -92,7 +92,7 @@ public class OMGServer {
 		constrs.put(type, new DataConstructor<T>(klass, fields));
 	}
 
-    public void installPredicate(String param, StringPredicateConstructor p) {
+    public void installPredicate(String param, PredicateConstructor p) {
 		predicates.put(param, p);
 	}
 

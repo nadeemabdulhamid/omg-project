@@ -8,6 +8,9 @@ package omg.server;
 /**
  * Represents the fields to be pulled from JSON data and unified with
  * the constructor of the target class.
+ * 
+ * If fields is empty, then expects the class to have a constructor that
+ * takes a single JSONObject argument.
  */
 
 public class DataConstructor<T> {

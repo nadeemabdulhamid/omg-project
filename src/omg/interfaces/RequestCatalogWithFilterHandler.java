@@ -16,7 +16,7 @@ import java.util.function.Predicate;
  */
 @FunctionalInterface
 @SuppressWarnings({ "rawtypes" })
-interface RequestCatalogWithFilterHandler extends RequestHandler {
+public interface RequestCatalogWithFilterHandler extends RequestHandler {
 	@Override default String getResponse() { throw new RuntimeException("unimplemented"); }
 
 	String getResponse(Predicate f);

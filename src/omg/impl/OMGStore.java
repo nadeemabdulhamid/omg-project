@@ -30,6 +30,7 @@ public class OMGStore {
 	
 	public OMGStore(OMGServer server) {
 		setupServer(server);
+		setupMaps();
 		items = server.fetchItemList();
 		
 		// alternate -- loading data as custom defined functional linked list
@@ -51,23 +52,7 @@ public class OMGStore {
 		server.installPredicate("max-price",  (IntPredicateConstructor) MaxPricePredicate::new);
 		server.installPredicate("min-year",   (IntPredicateConstructor) MinYearPredicate::new);
 		server.installPredicate("max-year",   (IntPredicateConstructor) MaxYearPredicate::new);
-		
-		// sorting
-		comps.put("", (b1, b2) -> 0);
-		comps.put("title", (b1, b2) -> b1.getTitle().compareTo(b2.getTitle()));
-		comps.put("price", (b1, b2) -> ((Integer)b1.salePrice()).compareTo(b2.salePrice()));
-		comps.put("year", (b1, b2) -> ((Integer)b1.getYear()).compareTo(b2.getYear()));
-		comps.put("rating", (b1, b2) -> ((Double)b1.getRating()).compareTo(b2.getRating()));
-		
-		// coupons
-		coupons.put("", new NoDiscountCoupon());
-		coupons.put("50%OFF", (items) -> items.stream().collect(Collectors.summingInt(IItem::salePrice)) / 2);
-		coupons.put("AUDIO50", (items) -> {
-			Predicate<IItem> isaudio = (i) -> i.isType("audio");
-			return items.stream().filter(isaudio.negate()).collect(Collectors.summingInt(IItem::salePrice))
-			+ items.stream().filter(isaudio).collect(Collectors.summingInt(IItem::salePrice)) / 2;
-		});
-		
+				
 		// API HANDLERS
 		
 		// product page
@@ -89,6 +74,24 @@ public class OMGStore {
 		server.installHandler("cart-get-coupon",    (RequestHandler) this::getCoupon);
 		server.installHandler("cart-apply-coupon",  (RequestCouponHandler) this::applyCoupon);
 		server.installHandler("cart-remove-coupon", (RequestCouponHandler) this::removeCoupon);
+	}
+
+	private void setupMaps() {
+		// sorting
+		comps.put("", (b1, b2) -> 0);
+		comps.put("title", (b1, b2) -> b1.getTitle().compareTo(b2.getTitle()));
+		comps.put("price", (b1, b2) -> ((Integer)b1.salePrice()).compareTo(b2.salePrice()));
+		comps.put("year", (b1, b2) -> ((Integer)b1.getYear()).compareTo(b2.getYear()));
+		comps.put("rating", (b1, b2) -> ((Double)b1.getRating()).compareTo(b2.getRating()));
+		
+		// coupons
+		coupons.put("", new NoDiscountCoupon());
+		coupons.put("50%OFF", (items) -> items.stream().collect(Collectors.summingInt(IItem::salePrice)) / 2);
+		coupons.put("AUDIO50", (items) -> {
+			Predicate<IItem> isaudio = (i) -> i.isType("audio");
+			return items.stream().filter(isaudio.negate()).collect(Collectors.summingInt(IItem::salePrice))
+			+ items.stream().filter(isaudio).collect(Collectors.summingInt(IItem::salePrice)) / 2;
+		});
 	}
 	
 	public String itemCatalogWithSort(Predicate<IItem> f, String sortfield, boolean ascending) {

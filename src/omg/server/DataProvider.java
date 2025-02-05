@@ -19,9 +19,9 @@ import org.json.*;
 @SuppressWarnings({"rawtypes", "unchecked"})
 public class DataProvider {
 	// Primitive classes for Java types, used for the schema
-	private static Class<?> booleanKlass = Class.forPrimitiveName("boolean");
-	private static Class<?> intKlass = Class.forPrimitiveName("int");
-	private static Class<?> doubleKlass = Class.forPrimitiveName("double");
+	private static Class<?> booleanKlass = Boolean.TYPE;
+	private static Class<?> intKlass = Integer.TYPE;
+	private static Class<?> doubleKlass = Double.TYPE;
 
 	// The raw JSON data from file
 	private JSONArray database;
@@ -106,11 +106,17 @@ public class DataProvider {
 	 * @param path The path to the JSON file
 	 * @throws IOException If the file cannot be read
 	 */
-	private void loadDatabase(String path) throws IOException {
-		InputStream in = this.getClass().getClassLoader().getResourceAsStream(path);
-		JSONTokener jt = new JSONTokener(in);
-		database = (JSONArray)jt.nextValue();
-		//System.out.println("Loaded: " + database);
+	private void loadDatabase(String path) {
+		try {
+			InputStream in = this.getClass().getClassLoader().getResourceAsStream(path);
+			if (in == null) { in = new FileInputStream(path); }
+			JSONTokener jt = new JSONTokener(in);
+			database = (JSONArray)jt.nextValue();
+			//System.out.println("Loaded: " + database);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			throw new RuntimeException("File not found: " + path);
+		}
 	}
 	
 
@@ -185,6 +191,8 @@ public class DataProvider {
 		} catch (NoSuchMethodException | SecurityException e) {
 			e.printStackTrace();
 		}
+
+		System.err.println("Constructor not found: " + type);
 
 		return null;
 	}

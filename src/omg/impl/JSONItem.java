@@ -84,7 +84,7 @@ public class JSONItem implements IItem {
             exp.put("type", "video");
             exp.put("starring", obj.optString("starring", null));
             exp.put("director", obj.optString("directed-by", null));
-            if (obj.optInt("sale-price", -1) > 0 && obj.optString("format", null) != null) {
+            if (obj.optInt("minutes", -1) > 0 && obj.optString("format", null) != null) {
                 exp.put("info-line", getInfoLine());
             }
         } 

@@ -24,10 +24,10 @@ public interface RequestTagsWithFilterHandler extends RequestHandler {
 	@Override default String getResponse() { throw new RuntimeException("unimplemented"); }
 
 	// ignore limit
-	@Override default String getResponse(Predicate f, String tagsearch, int limit) {
-		return getResponse(f, tagsearch);
+	@Override default String getResponse(Predicate f, String tagSearch, int limit) {
+		return getResponse(f, tagSearch);
 	}
 
 	// tagsearch could be null
-	String getResponse(Predicate f, String tagsearch);
+	String getResponse(Predicate f, String tagSearch);
 }

@@ -37,7 +37,7 @@ public class OMGStore {
 		System.out.println(loitems.count());
 	}
 	
-	@SuppressWarnings({ "unused", "unchecked" })
+	@SuppressWarnings({ "unchecked" })
 	private void setupServer(OMGServer server) {
 		server.installConstructor("audio", JSONItem.class);
 		server.installConstructor("print", JSONItem.class);
@@ -83,7 +83,7 @@ public class OMGStore {
 		server.installHandler("cart-add",           (RequestItemDataHandler) this::cartAdd);
 		server.installHandler("cart-remove",        (RequestItemDataHandler) this::cartRemove);
 		server.installHandler("cart-list",          (RequestCatalogHandler) (() -> "[ " + 
-		cart.stream().map((i) -> "" + i).collect(Collectors.joining(",")) + " ]"));
+								cart.stream().map((i) -> "" + i).collect(Collectors.joining(",")) + " ]"));
 		server.installHandler("cart-subtotal",      (RequestHandler) this::cartSubtotal);
 		server.installHandler("cart-total",         (RequestHandler) this::cartTotal);
 		server.installHandler("cart-get-coupon",    (RequestHandler) this::getCoupon);
@@ -203,8 +203,8 @@ public class OMGStore {
 	}
 	
 	public String applyCoupon(String code) {
-		if (!couponCode.equals("") ||
-		!coupons.containsKey(code)) {
+		if (couponCode.equals("") ||
+			!coupons.containsKey(code)) {
 			return "false";
 		} else {
 			couponCode = code;

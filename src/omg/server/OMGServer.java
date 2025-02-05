@@ -146,6 +146,9 @@ public class OMGServer {
      */
 	public <T> T fetchOneItemData() {
 		List<T> data = fetchItemList();
+        if (data.size() == 0) {
+            throw new RuntimeException("No items in data.");
+        }
 		return data.get(new Random().nextInt(data.size()));
 	}
 

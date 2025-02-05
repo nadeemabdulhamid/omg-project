@@ -25,5 +25,5 @@ public interface RequestTagsWithLimitHandler extends RequestHandler {
 	@Override default String getResponse() { throw new RuntimeException("unimplemented"); }
 
 	// tagsearch could be null, limit < 0  means igmore
-	String getResponse(Predicate f, String tagsearch, int limit);
+	String getResponse(Predicate f, String tagSearch, int limit);
 }

@@ -22,11 +22,16 @@ private void setupServer(OMGServer server) {
     
     // product page services
     server.installHandler("catalog",   (RequestCatalogWithSortHandler) this::METHOD);
+            // or (RequestCatalogWithFilterHandler) or (RequestCatalogHandler) 
     server.installHandler("count",     (RequestCountWithFilterHandler) this::METHOD);
+            // or (RequestCountHandler)
     server.installHandler("item-data", (RequestItemDataHandler) this::METHOD);
     server.installHandler("tags", 	   (RequestTagsWithLimitHandler) this::METHOD);
+            // or (RequestTagsWithFilterHandler) or (RequestTagsHandler)
     server.installHandler("price-range", (RequestRangeWithFilterHandler) this::METHOD);
+            // or (RequestRangeHandler)
     server.installHandler("year-range", (RequestRangeWithFilterHandler) this::METHOD);
+            // or (RequestRangeHandler)
     
     // cart services
     server.installHandler("cart-count",         (RequestCountHandler) this::METHOD);

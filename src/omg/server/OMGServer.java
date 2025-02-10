@@ -61,6 +61,7 @@ public class OMGServer {
         try {
 			server = HttpServer.create(new InetSocketAddress(port), 0);
             server.createContext("/static/", fileServeHandler);
+            server.createContext("/favicon.ico", fileServeHandler);   // special
             server.createContext("/exit/", exitHandler);
             HttpContext apiContext = server.createContext("/api/", apiHandler);
             apiContext.getFilters().add(new ParameterFilter());

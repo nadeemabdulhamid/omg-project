@@ -21,7 +21,10 @@ public class FileServeHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange t) throws IOException {
         Headers headers = t.getResponseHeaders();
+        
         String path = t.getRequestURI().getPath().substring(1);  // clear the "/" at the beginning
+
+        if (path.equals("favicon.ico")) { path = "static/favicon.ico"; }
         if (path.equals("static/") || path.equals("static")) { path = "static/index.html"; }
 
         if (!path.contains("..")) {

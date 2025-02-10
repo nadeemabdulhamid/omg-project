@@ -181,8 +181,13 @@
         if (minPriceInp.value != "" && Number(minPriceInp.value) > Number(minPriceInp.max)) { minPriceInp.value = retainAndFixInvalid ? minPriceInp.min : ""; needToReload = true; }
 
         if (maxPriceInp.value != "" && Number(maxPriceInp.value) > Number(maxPriceInp.max)) { maxPriceInp.value = retainAndFixInvalid ? maxPriceInp.max : ""; needToReload = true; }
+        if (maxPriceInp.value != "" && Number(maxPriceInp.value) < Number(maxPriceInp.min)) { maxPriceInp.value = retainAndFixInvalid ? maxPriceInp.max : ""; needToReload = true; }
+
         if (minYearInp.value != "" && Number(minYearInp.value) < Number(minYearInp.min)) { minYearInp.value = retainAndFixInvalid ? minYearInp.min : ""; needToReload = true; }
+        if (minYearInp.value != "" && Number(minYearInp.value) > Number(minYearInp.max)) { minYearInp.value = retainAndFixInvalid ? minYearInp.min : ""; needToReload = true; }
+
         if (maxYearInp.value != "" && Number(maxYearInp.value) > Number(maxYearInp.max)) { maxYearInp.value = retainAndFixInvalid ? maxYearInp.max : ""; needToReload = true; }
+        if (maxYearInp.value != "" && Number(maxYearInp.value) < Number(maxYearInp.min)) { maxYearInp.value = retainAndFixInvalid ? maxYearInp.max : ""; needToReload = true; }
         
         if (minPriceInp.value != "" && maxPriceInp.value != "" && Number(minPriceInp.value) > Number(maxPriceInp.value)) {
             minPriceInp.value = maxPriceInp.value; 
@@ -194,6 +199,8 @@
         }
 
         if (needToReload) { loadProducts(); }
+
+        return true;
     }
 
 

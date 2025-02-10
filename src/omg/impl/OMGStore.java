@@ -143,23 +143,18 @@ public class OMGStore {
 	// price range with filtering (should be only on types)
 	public String priceRange(Predicate<IItem> f) {
 		List<Integer> prices = items.stream().filter(f).map(IItem::salePrice).toList();
-		Optional<Integer> min = prices.stream().collect(Collectors.minBy(Integer::compare));
-		Optional<Integer> max = prices.stream().collect(Collectors.maxBy(Integer::compare));
-		if (min.isEmpty() || max.isEmpty()) {
-			return "false";
-		} else {
-			JSONObject obj = new JSONObject();
-			obj.put("min", min.get());
-			obj.put("max", max.get());
-			return obj.toString();
-		}
+		return minMaxRange(prices);
 	}
 	
 	// year range with filtering (should be only on types)
 	public String yearRange(Predicate<IItem> f) {
 		List<Integer> years = items.stream().filter(f).map(IItem::getYear).toList();
-		Optional<Integer> min = years.stream().collect(Collectors.minBy(Integer::compare));
-		Optional<Integer> max = years.stream().collect(Collectors.maxBy(Integer::compare));
+		return minMaxRange(years);
+	}
+
+	private String minMaxRange(List<Integer> vals) {
+		Optional<Integer> min = vals.stream().collect(Collectors.minBy(Integer::compare));
+		Optional<Integer> max = vals.stream().collect(Collectors.maxBy(Integer::compare));
 		if (min.isEmpty() || max.isEmpty()) {
 			return "false";
 		} else {

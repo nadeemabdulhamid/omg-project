@@ -181,7 +181,9 @@ public class DataProvider {
 		if (cp.fields.length == 0) {
 			paramTypes = new Class[] {JSONObject.class};
 		} else {
-			paramTypes = Stream.of(cp.fields).map(f ->  dataSchema.get(f)).toArray(Class[]::new);
+			paramTypes = Stream.of(cp.fields).map(f -> { if (!dataSchema.containsKey(f)) { throw new RuntimeException("No such field in data: " + f);}
+														 return dataSchema.get(f);})
+								.toArray(Class[]::new);
 		}
 
 		try {

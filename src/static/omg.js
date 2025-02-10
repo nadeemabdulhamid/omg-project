@@ -255,7 +255,7 @@
             }
 
             if (scrollToTags) {
-                document.getElementById("filter-tags").scrollIntoView( { behavior : "instant" } );
+                document.getElementById("sidebar").scrollIntoView( { behavior : "instant" } );
             }
         });
     }

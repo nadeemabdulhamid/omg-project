@@ -59,7 +59,7 @@ public class OMGStore {
 		server.installHandler("catalog",   (RequestCatalogWithSortHandler) this::itemCatalogWithSort);
 		server.installHandler("count",     (RequestCountWithFilterHandler) (f) -> Long.toString(items.stream().filter(f).count()));
 		server.installHandler("item-data", (RequestItemDataHandler) (id) -> getItemById(id).asJSON().toString());
-		server.installHandler("tags", 	   (RequestTagsWithLimitHandler) this::tagArrayWithLimit);
+		server.installHandler("tags", 	   (RequestTagsWithFilterAndLimitHandler) this::tagArrayWithLimit);
 		server.installHandler("price-range", (RequestRangeWithFilterHandler) this::priceRange);
 		server.installHandler("year-range", (RequestRangeWithFilterHandler) this::yearRange);
 		

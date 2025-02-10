@@ -20,14 +20,10 @@ import java.util.function.Predicate;
  * "[ [tag1, count1], [tag2, count2], ... ]"
  */
 @FunctionalInterface
-public interface RequestTagsWithLimitHandler extends RequestHandler {
+@SuppressWarnings({ "rawtypes" })
+public interface RequestTagsWithFilterAndLimitHandler extends RequestHandler {
 	@Override default String getResponse() { throw new RuntimeException("unimplemented"); }
 
-		// ignore filter, tagSearch
-	@Override default String getResponse(Predicate f, String tagSearch, int limit) {
-		return getResponse(limit);
-	}
-
-	// limit < 0  means igmore
-	String getResponse(int limit);
+	// tagsearch could be null, limit < 0  means igmore
+	String getResponse(Predicate f, String tagSearch, int limit);
 }

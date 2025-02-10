@@ -103,6 +103,11 @@ A back-end handler method should return a string formatted as a JSON object with
 }
 ```
 
+The `"star-icons"` strings should be either:
+- `"fa-solid fa-star"` for a full star
+- `"fa-regular fa-star-half-stroke"` for a partial star
+- `"fa-regular fa-star"` for an empty star
+
 ### Handler
 
 - Use `OMGServer.installHandler("item-data", (RequestItemDataHandler)...)` to provide a back-end handler for this endpoint. The handler should implement the [`RequestItemDataHandler`](../src/omg/interfaces/RequestItemDataHandler.java) interface with a method that takes a single integer parameter:

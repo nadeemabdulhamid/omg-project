@@ -10,7 +10,7 @@ All raw price values are in whole numbers, representing cents.
 > - [`/api/catalog`](#catalog-endpoint) - JSON list of item ids
 > - [`/api/item-data`](#item-data-endpoint) - JSON object with item fields
 > - [`/api/count`](#count-endpoint) - JSON integer
-> - [`/api/tags`](#tags-endpoint) - JSON list of *[tag, frequency-count]* pairs
+> - [`/api/tags`](#tags-endpoint) - JSON list of strings or *[tag, frequency-count]* pairs
 > - [`/api/price-range`](#priceyear-range-endpoints) and<br>
 >   [`/api/year-range`](#priceyear-range-endpoints) - JSON object with `min` and `max` fields
 > 
@@ -92,7 +92,7 @@ A back-end handler method should return a string formatted as a JSON object with
     "image" : "<url>",              // string
     "description-short" : "<text>", // string
     "description-full" : "<text>",  // string
-    "tags" : [ "t1", "t2", ... ],   // list of strings
+    "tags" : [ "t1", "t2", ... ],   // list of strings OR a single string
     "rating-average" : <num>,       // double/decimal number
     "star-icons" : ["...", ...],    // list of 5 icon style strings
     "rating-count" : <num>,         // integer
@@ -151,14 +151,20 @@ A back-end handler method should return an integer formatted as a string.
 
 ### Response format
 
-A back-end handler method should return JSON list of two-element lists, where the first element of each list should be a tag, and the second element is a frequency count. The list should be provided in decreasing order of frequency, for example:
+A back-end handler method should return either:
 
-    [ ["programming", 5], 
-      ["software engineering", 5], 
-      ["coding", 4], 
-      ["technology", 3], 
-      ... 
-    ]
+- A JSON list of strings, 
+
+      [ "programming", "software engineering", "coding", ... ]
+
+- or, a JSON list of two-element lists, where the first element of each list should be a tag, and the second element is a frequency count. The list should be provided in decreasing order of frequency, for example:
+
+      [ ["programming", 5], 
+        ["software engineering", 5], 
+        ["coding", 4], 
+        ["technology", 3], 
+        ... 
+      ]
 
 ### Handlers
 

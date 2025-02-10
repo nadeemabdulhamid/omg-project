@@ -213,11 +213,20 @@
         let qobj = createFilterQueryObj();
         if (!showAllTags) { qobj["tag-limit"] = 10; }  // limit tags unless expanded (the "Show all tags" button)
         fetchJSON("/api/tags", qobj).then(tags => {
-            for (const pair of tags) {                               // pair is [tag, count]
+            // maybe a string or a pair of [tag, count]
+            for (const maybePair of tags) {
+                let pair;
+                if (typeof maybePair == 'string') {
+                    pair = [maybePair, false];
+                } else {
+                    pair = maybePair;
+                }
                 let tagPiece = document.importNode(tagFilterSelectTemplate, true);  // clone
                 let btn = tagPiece.querySelector("button");
                 btn.prepend(pair[0]);
-                tagPiece.querySelector("span").textContent = pair[1];
+                if (pair[1] !== false) {
+                    tagPiece.querySelector("span").textContent = pair[1];
+                }
                 filterTags.append(tagPiece);
                 if (getCurrentTagList().includes(pair[0])) {    
                     btn.classList.add("d-none");    // hide the tag if it's currently in the current-tags
@@ -396,7 +405,9 @@
         // tags
         if ("tags" in itemdata) {
             const itemTagsP = itemCard.querySelector(".omg-item-tags");
-            for (const t of itemdata["tags"]) {
+            let taglist = itemdata["tags"];
+            if (typeof taglist == 'string') { taglist = [taglist]; }
+            for (const t of taglist) {
                 let tagB = document.importNode(itemTagTemplate, true);
                 tagB.querySelector("span").textContent = t;
                 itemTagsP.appendChild(tagB);
@@ -431,7 +442,7 @@
                 priceS = document.importNode(itemPriceDiscountTemplate, true);
                 priceS.querySelector("strong").textContent = itemdata["price"]["sale"];
                 priceS.querySelector("s").textContent = itemdata["price"]["list"];
-                priceS.querySelector("span").appendChild(document.createTextNode(itemdata["price"]["discount"]));
+                priceS.querySelector("div").appendChild(document.createTextNode(itemdata["price"]["discount"]));
             }
             itemCard.querySelector(".omg-item-price-line").appendChild(priceS);
         }

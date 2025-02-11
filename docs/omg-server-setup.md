@@ -21,27 +21,27 @@ private void setupServer(OMGServer server) {
     // register API handlers
     
     // product page services
-    server.installHandler("catalog",   (RequestCatalogWithSortHandler) this::METHOD);
+    server.installHandler("catalog",   (RequestCatalogWithSortHandler) OBJ::METHOD);
             // or (RequestCatalogWithFilterHandler) or (RequestCatalogHandler) 
-    server.installHandler("count",     (RequestCountWithFilterHandler) this::METHOD);
+    server.installHandler("count",     (RequestCountWithFilterHandler) OBJ::METHOD);
             // or (RequestCountHandler)
-    server.installHandler("item-data", (RequestItemDataHandler) this::METHOD);
-    server.installHandler("tags",      (RequestTagsWithFilterAndLimitHandler) this::METHOD);
+    server.installHandler("item-data", (RequestItemDataHandler) OBJ::METHOD);
+    server.installHandler("tags",      (RequestTagsWithFilterAndLimitHandler) OBJ::METHOD);
             // or (RequestTagsWithFilterHandler) or (RequestTagsWithLimitHandler) or (RequestTagsHandler)
-    server.installHandler("price-range", (RequestRangeWithFilterHandler) this::METHOD);
+    server.installHandler("price-range", (RequestRangeWithFilterHandler) OBJ::METHOD);
             // or (RequestRangeHandler)
-    server.installHandler("year-range", (RequestRangeWithFilterHandler) this::METHOD);
+    server.installHandler("year-range", (RequestRangeWithFilterHandler) OBJ::METHOD);
             // or (RequestRangeHandler)
     
     // cart services
-    server.installHandler("cart-count",         (RequestCountHandler) this::METHOD);
-    server.installHandler("cart-add",           (RequestItemDataHandler) this::METHOD);
-    server.installHandler("cart-remove",        (RequestItemDataHandler) this::METHOD);
-    server.installHandler("cart-list",          (RequestCatalogHandler) this::METHOD);
-    server.installHandler("cart-subtotal",      (RequestHandler) this::METHOD);
-    server.installHandler("cart-total",         (RequestHandler) this::METHOD);
-    server.installHandler("cart-get-coupon",    (RequestHandler) this::METHOD);
-    server.installHandler("cart-apply-coupon",  (RequestCouponHandler) this::METHOD);
-    server.installHandler("cart-remove-coupon", (RequestCouponHandler) this::METHOD);
+    server.installHandler("cart-count",         (RequestCountHandler) OBJ::METHOD);
+    server.installHandler("cart-add",           (RequestItemDataHandler) OBJ::METHOD);
+    server.installHandler("cart-remove",        (RequestItemDataHandler) OBJ::METHOD);
+    server.installHandler("cart-list",          (RequestCatalogHandler) OBJ::METHOD);
+    server.installHandler("cart-subtotal",      (RequestHandler) OBJ::METHOD);
+    server.installHandler("cart-total",         (RequestHandler) OBJ::METHOD);
+    server.installHandler("cart-get-coupon",    (RequestHandler) OBJ::METHOD);
+    server.installHandler("cart-apply-coupon",  (RequestCouponHandler) OBJ::METHOD);
+    server.installHandler("cart-remove-coupon", (RequestCouponHandler) OBJ::METHOD);
 }
 ```

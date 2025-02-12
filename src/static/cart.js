@@ -88,10 +88,13 @@
                 msgDiv.textContent = `Coupon code ${result} applied. `; 
                 msgDiv.appendChild(removeBtn);
 
+                document.getElementById("apply-coupon-div").classList.add("d-none");
+
                 document.querySelector(".omg-remove-coupon").addEventListener("click", () => {
                     fetchJSON("/api/cart-remove-coupon", { "code" : result}).then(loadCart);
                 });
             } else {
+                document.getElementById("apply-coupon-div").classList.remove("d-none");
                 msgDiv.innerHTML = "";
             }
         });

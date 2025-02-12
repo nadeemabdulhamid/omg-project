@@ -201,8 +201,7 @@ public class OMGStore {
 	}
 	
 	public String applyCoupon(String code) {
-		if (couponCode.equals("") ||
-			!coupons.containsKey(code)) {
+		if (!couponCode.equals("") || !coupons.containsKey(code)) {
 			return "false";
 		} else {
 			couponCode = code;

@@ -47,7 +47,7 @@ public class OMGServer {
     /* Constructors */
     
     public OMGServer() {
-		this("data/chatgpt-test-data.json", DEFAULT_PORT);
+		this("data/copilot-generated.json", DEFAULT_PORT);
 	}
 
     public OMGServer(String dataFile) {

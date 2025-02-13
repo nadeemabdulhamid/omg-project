@@ -10,7 +10,10 @@ These do not necessarily correspond to individual lectures. More often they will
 - Simple methods
     - writtenBy
     - salePrice         (if   price > 0)  <--- make sure **
+    - updatePrice    (need equals() for tests,  toString to see )
     - toJSONString
+
+
 
 
 ### Stage 2 - Containment
@@ -48,7 +51,6 @@ Extension:
 ### Stage 5 (was 8) - Mutation
 
 - Cart, v1 ---   ILoN      
-    - use asJSONList in ILo
     -list, add, remove, count
 
 - Aside: model authors, books, circular referrence
@@ -58,37 +60,31 @@ Extension
 
 
 
-### Stage 6 (was 5) - Abstraction, Class Hierarchies, and Exceptions
+### Stage 6 (5 in omg-v1) - Abstraction, Class Hierarchies, and Exceptions
 
 - lift fields to abstract class,
   and then methods of the IMedia hierarchy
     - for buildPrice, ensure  price > 0 && ...
 
-
-
 - introduce JSON objects instead of manually constructing strings   *****
  - IPrice change: Object toJSON();    -- talk about Object as superclass of everything (String and JSONObject)
 
 - do year range (see extension for price range)
-        (accumulator style methods)
-    - Exceptions - RangeException,   superclass constructor, hierarchy checked/unchecked
 - add year to info line
 
 - change infoAsJSON() to findById()  ; produce an exception if not found
 - introduce containsId()  as guard
 
-
-
 Extension:
-    - isEmpty() in list
     - price range  (Range class) 
     - add star-icons to rating with JSONArray   --- see stage05.ext.Rating in omg-v1
 
 
-### Stage 7 (was 6) - Abstracting Types (Generics)
+### Stage 7 (6 in omg-v1) - Abstracting Types (Generics)
 
 - ILo<T>    --- replace ILoS,   but discuss problems with ILoM ... see extension
 - make cart... ILo<Integer>    <---- talk about wrapper types
+    - use asJSONList in ILo
 
 Extension:
     - add 
@@ -102,7 +98,7 @@ Extension:
 
 
 
-### Stage 8 (was 7) - Abstracting Behavior (Function Objects)
+### Stage 8 (7 in omg-v1) - Abstracting Behavior (Function Objects)
 - goal: handle Predicate parameter versions of API methods
 
 - Abstract over priceRange and yearRange in ILoM
@@ -134,6 +130,11 @@ Extension
 
 - loops
 
+- change AbsMedia constructor to take   List<String>   for tags, instead of splitting up on commas
+
+- ***** change data file for list of tags
+
+
 Extension:
     - turn ILoM::range() into Store::range(List<Integer> )  and handle predicate too in the rangehandler
         - revisit Range and define as mutable
@@ -149,16 +150,19 @@ Extension:
 - implement cart-total and cart-subtotal
     - add a Map of coupon codes to coupon objects  (use  Map.of(....) to construct)
 
+Extension:
+    - implement some custom coupons
 
 
 
-
-### Stage 11 - Sorting
+### Stage 11 - Sorting, Functional Interfaces
     - itemsMatching()  helper function
     - overload a catalog() method with  year sorting, using a YearComparator
     - introduce a Map of sorts to the Store
     - incorporate the lookup sort in catalog()
     - do title as well
+
+    - inner classes, anonymous classes, functional interfaces, lambda functions
 
 Extension:
     price, rating
@@ -166,7 +170,6 @@ Extension:
 
 ### Stage 12 - Streams
 
-    - inner classes, anonymous classes, functional interfaces, lambda functions
     - rewrite existing methods
     - implement sorted tag counts with limit
 
@@ -177,8 +180,7 @@ Extension (not related to streams):
             add format, minutes, duration, etc.
             - image, descriptoin
             -  pages, publisher, duration
-            
-    change AbsMedia constructor to take   List<String>   for tags, instead of splitting up on commas
+
 
 
 Exception testing:

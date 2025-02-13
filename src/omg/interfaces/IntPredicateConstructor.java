@@ -7,8 +7,7 @@ package omg.interfaces;
 
 import java.util.function.Predicate;
 
-@SuppressWarnings({ "rawtypes" })
-public interface IntPredicateConstructor extends PredicateConstructor {
-	default Predicate create(String s) { return create(Integer.parseInt(s)); }
-	Predicate create(int i);
+public interface IntPredicateConstructor<T> extends PredicateConstructor<T> {
+	default Predicate<T> create(String s) { return create(Integer.parseInt(s)); }
+	Predicate<T> create(int i);
 } 

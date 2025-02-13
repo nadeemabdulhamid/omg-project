@@ -12,8 +12,7 @@ import java.util.function.Predicate;
  * have a single argument constructor (either a String or an int). Subclasses
  * of this interface will require one or the other constructor to be implemented.
  */
-@SuppressWarnings({ "rawtypes" })
-public interface PredicateConstructor {
-	default Predicate create(String s) { throw new RuntimeException("unimplemented"); }
-	default Predicate create(int i) { throw new RuntimeException("unimplemented"); }
+public interface PredicateConstructor<T> {
+	default Predicate<T> create(String s) { throw new RuntimeException("unimplemented"); }
+	default Predicate<T> create(int i) { throw new RuntimeException("unimplemented"); }
 } 

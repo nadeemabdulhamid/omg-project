@@ -84,7 +84,7 @@ public class JSONItem implements IItem {
             exp.put("type", "video");
             exp.put("starring", obj.optString("starring", null));
             exp.put("director", obj.optString("directed-by", null));
-            if (obj.optInt("minutes", -1) > 0 && obj.optString("format", null) != null) {
+            if (obj.optInt("minutes", -1) > 0 && obj.optInt("year") > 0 && obj.optString("format", null) != null) {
                 exp.put("info-line", getInfoLine());
             }
         } 
@@ -183,7 +183,7 @@ public class JSONItem implements IItem {
         } else if (isType("audio")) {
             return (obj.getInt("duration")/60) + " minutes • " + obj.getInt("year");
         } else if (isType("video")) {
-            return obj.getInt("minutes") + " minutes • " + obj.getString("format");
+            return obj.getInt("minutes") + " minutes • " + obj.getString("format") + " • " + obj.getInt("year");
         } else {
             throw new UnsupportedOperationException("Unimplemented method 'getInfoLine'");
         }

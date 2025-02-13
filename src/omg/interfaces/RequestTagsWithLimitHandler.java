@@ -20,6 +20,7 @@ import java.util.function.Predicate;
  * "[ [tag1, count1], [tag2, count2], ... ]"
  */
 @FunctionalInterface
+@SuppressWarnings("rawtypes")
 public interface RequestTagsWithLimitHandler extends RequestHandler {
 	@Override default String getResponse() { throw new RuntimeException("unimplemented"); }
 

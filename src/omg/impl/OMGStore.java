@@ -45,13 +45,13 @@ public class OMGStore {
 		server.installConstructor("video", JSONItem.class);
 		
 		// filtering
-		server.installPredicate("types", 	  (StringPredicateConstructor) TypePredicate::new);
-		server.installPredicate("search", 	  (StringPredicateConstructor) SearchPredicate::new);
-		server.installPredicate("tags", 	  (StringPredicateConstructor) TagsPredicate::new);
-		server.installPredicate("min-price",  (IntPredicateConstructor) MinPricePredicate::new);
-		server.installPredicate("max-price",  (IntPredicateConstructor) MaxPricePredicate::new);
-		server.installPredicate("min-year",   (IntPredicateConstructor) MinYearPredicate::new);
-		server.installPredicate("max-year",   (IntPredicateConstructor) MaxYearPredicate::new);
+		server.installPredicate("types", 	  (StringPredicateConstructor<IItem>) tys -> item -> item.isType(tys));
+		server.installPredicate("search", 	  (StringPredicateConstructor<IItem>) query -> item -> item.containsText(query));
+		server.installPredicate("tags", 	  (StringPredicateConstructor<IItem>) tags -> item -> item.hasAnyTag(tags.split(",")));
+		server.installPredicate("min-price",  (IntPredicateConstructor<IItem>) minPrice -> item -> item.salePrice() >= minPrice);
+		server.installPredicate("max-price",  (IntPredicateConstructor<IItem>) maxPrice -> item -> item.salePrice() <= maxPrice);
+		server.installPredicate("min-year",   (IntPredicateConstructor<IItem>) minYear -> item -> item.getYear() >= minYear);
+		server.installPredicate("max-year",   (IntPredicateConstructor<IItem>) maxYear -> item -> item.getYear() <= maxYear);
 				
 		// API HANDLERS
 		

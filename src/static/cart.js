@@ -145,7 +145,9 @@
         // tags
         if ("tags" in itemdata) {
             const itemTagsP = itemCard.querySelector(".omg-item-tags");
-            for (const t of itemdata["tags"]) {
+            let taglist = itemdata["tags"];
+            if (typeof taglist == 'string') { taglist = [taglist]; }
+            for (const t of taglist) {
                 let tagB = document.importNode(itemTagTemplate, true);
                 tagB.querySelector("span").textContent = t;
                 itemTagsP.appendChild(tagB);

@@ -369,6 +369,11 @@
      * @param {JSON} itemdata 
      */
     function appendItemToList(itemdata) {
+        if (!("type" in itemdata)) {
+            console.error("Item data does not have a type field", itemdata);
+            return;
+        }
+
         const itemCard = document.importNode(itemTemplate, true);  // clone
         const itemType = itemdata["type"];
         const itemId = itemdata["id"];

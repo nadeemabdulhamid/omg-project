@@ -102,6 +102,11 @@
     
     
     function appendItemToList(itemdata) {
+        if (!("type" in itemdata)) {
+            console.error("Item data does not have a type field", itemdata);
+            return;
+        }
+
         const itemCard = document.importNode(itemCartCardTemplate, true);  // clone
         const itemType = itemdata["type"];
         const itemId = itemdata["id"];

@@ -22,7 +22,7 @@ public class DefaultHandler implements HttpHandler {
         headers.set("Content-Type", "text/html");
 
         String response = "File not found. <a href=\"/static/\">OMG</a>" + 
-                "<p><a href=\"/exit\" onclick=\"fetch('/exit'); return false;\">Exit</a>";
+                "<p><a href=\"/exit/\" onclick=\"fetch('/exit/'); return false;\">Exit</a>";
         t.sendResponseHeaders(404, response.length());
         OutputStream os = t.getResponseBody();
         os.write(response.getBytes());

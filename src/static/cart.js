@@ -62,9 +62,12 @@
         document.getElementById("omg-cart-list").innerHTML = "";
         
         fetchJSON("/api/cart-list").then((prodlist) => {
-            for (const id of prodlist) {
-                fetchJSON("/api/item-data", { "id" : id }).then(appendItemToList);
-            }
+            (async () => {
+                for (const id of prodlist) {
+                    const itemData = await fetchJSON("/api/item-data", { "id" : id });
+                    appendItemToList(itemData);
+                }
+            })();
         });
 
         fetchJSON("/api/cart-subtotal").then((subtotal) => {

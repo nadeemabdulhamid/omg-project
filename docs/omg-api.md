@@ -173,17 +173,21 @@ A back-end handler method should return either:
 
 ### Handlers
 
-- Use `OMGServer.installHandler("tags", (RequestTags...Handler)...)` to provide a back-end handler for this endpoint. There are three options for the handler interface:
+- Use `OMGServer.installHandler("tags", (RequestTags...Handler)...)` to provide a back-end handler for this endpoint. There are four options for the handler interface:
 
     - [`RequestTagsHandler`](../src/omg/interfaces/RequestTagsHandler.java) - a method that takes no parameters and produces a `String`. This one is expected to simply provide the list of all tags in the catalog, in the response format described above, preferably sorted by frequency (and then alphabetically).
         
         ```public String method()```
 
+    - [`RequestTagsWithLimitHandler`](../src/omg/interfaces/RequestTagsWithLimitHandler.java) - a method that takes a single integer, `limit`. If the `limit` is negative, it can be ignored completely, and the handler produces the same as `RequestTagsHandler`. Otherwise (if `limit` is non-negative), this handler is expected to provide a list of only the first `limit` number of tags. 
+
+        ```public String method(Predicate f, String tagSearch)```
+
     - [`RequestTagsWithFilterHandler`](../src/omg/interfaces/RequestTagsWithFilterHandler.java) - a method that takes a `Predicate` on items, and a tag search string, and produces a `String`. This one is expected to provide a list of tags, that contain the tag search string, for all items in the catalog filtered by the given criteria.
 
         ```public String method(Predicate f, String tagSearch)```
 
-    - [`RequestTagsWithLimitHandler`](../src/omg/interfaces/RequestTagsWithLimitHandler.java) - a method that takes a `Predicate` on items, and a tag search string, and produces a `String`. This one is expected to provide a list of tags, that contain the tag search string, for all items in the catalog filtered by the given criteria. Only the first `limit` number of tags should be produced, when sorted by frequency (and then alphabetically).
+    - [`RequestTagsWithFilterAndLimitHandler`](../src/omg/interfaces/RequestTagsWithFilterAndLimitHandler.java) - a method that takes a `Predicate` on items, a tag search string, and an integer `limit`, and produces a `String`. This one is expected to provide a list of tags, that contain the tag search string, for all items in the catalog filtered by the given criteria. Only the first `limit` number of tags should be produced (unless `limit` is negative, in which case it is ignored), when sorted by frequency (and then alphabetically).
 
         ```String method(Predicate f, String tagSearch, int limit)```
 

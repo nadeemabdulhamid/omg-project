@@ -85,16 +85,19 @@ public class OMGServer {
         System.out.println("Server started on port " + server.getAddress().getPort());
     }
 
-    public void installHandler(String apiService, RequestHandler h) {
+    public OMGServer installHandler(String apiService, RequestHandler h) {
 		handlers.put(apiService, h);
+        return this;
 	}	
 
-    public <T> void installConstructor(String type, Class<T> klass, String... fields) {
+    public <T> OMGServer installConstructor(String type, Class<T> klass, String... fields) {
 		constrs.put(type, new DataConstructor<T>(klass, fields));
+        return this;
 	}
 
-    public void installPredicate(String param, PredicateConstructor p) {
+    public OMGServer installPredicate(String param, PredicateConstructor p) {
 		predicates.put(param, p);
+        return this;
 	}
 
     public boolean hasHandlerFor(String apiService) {

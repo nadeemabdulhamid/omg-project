@@ -38,6 +38,7 @@
 
     // whether to limit tags requested or not
     let showAllTags = false;
+    const TAG_LIMIT = 10;
 
     
     document.addEventListener('DOMContentLoaded', function() {
@@ -218,7 +219,7 @@
         filterTags.innerHTML = '';
 
         let qobj = createFilterQueryObj();
-        if (!showAllTags) { qobj["tag-limit"] = 10; }  // limit tags unless expanded (the "Show all tags" button)
+        if (!showAllTags) { qobj["tag-limit"] = TAG_LIMIT; }  // limit tags unless expanded (the "Show all tags" button)
         fetchJSON("/api/tags", qobj).then(tags => {
             // maybe a string or a pair of [tag, count]
             for (const maybePair of tags) {
@@ -252,6 +253,14 @@
                     btn.classList.add("d-none");
                     loadProducts();
                 });
+            }
+
+            if (!showAllTags) {
+                if (tags.length < TAG_LIMIT) {
+                    document.getElementById("show-all-tags").classList.add("d-none");
+                } else {
+                    document.getElementById("show-all-tags").classList.remove("d-none");
+                }
             }
 
             if (scrollToTags) {

@@ -181,7 +181,7 @@ A back-end handler method should return either:
 
     - [`RequestTagsWithLimitHandler`](../src/omg/interfaces/RequestTagsWithLimitHandler.java) - a method that takes a single integer, `limit`. If the `limit` is negative, it can be ignored completely, and the handler produces the same as `RequestTagsHandler`. Otherwise (if `limit` is non-negative), this handler is expected to provide a list of only the first `limit` number of tags. 
 
-        ```public String method(Predicate f, String tagSearch)```
+        ```public String method(int limit)```
 
     - [`RequestTagsWithFilterHandler`](../src/omg/interfaces/RequestTagsWithFilterHandler.java) - a method that takes a `Predicate` on items, and a tag search string, and produces a `String`. This one is expected to provide a list of tags, that contain the tag search string, for all items in the catalog filtered by the given criteria.
 

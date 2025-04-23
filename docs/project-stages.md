@@ -2,6 +2,11 @@
 
 These do not necessarily correspond to individual lectures. More often they will encompass topics from more than one lecture/class session.
 
+> In class work == CodeCraft Studio Sessions ($C^2S^2$)
+
+### Stage 0 - Setup and Welcome
+
+
 
 ### Stage 1 - Simple classes
 
@@ -56,6 +61,10 @@ Extension:
     - update Main  (fetch "tags" from data-4 --  will not be separated when run at this point)
 
 Extension:
+
+    prepare for cart representation
+    - ILoN                  <----- work on in class/homework, with methods
+
     tags list with limit
 
     part 1
@@ -82,48 +91,59 @@ Extension:
 - Intro: model authors, books, circular referrence
 
 - Cart, v1 ---   
-    - ILoN                  <----- work on in class/homework
-    -list, add, remove, count
+    - add ILoN cart field to Store
+    - list, add, remove, count
                                     exam question: difference between two versions of remove() - one all, one first
 
 - change infoAsJSON() to findById()  ; produce null if not found 
+
+
+Classwork
+    - equals() method with cyclical data
+    - chatgpt - exercise - forwarding packages between warehouses
 
 Extension
      - apply, remove, get coupon (single one, "50%OFF")
             - add "cart-add-coupon", etc. handlers ****
     - Range                     <------ work on in class/homework
         (an OO, immutable version as alternate - on exam? )
-
+        (exam question - how to avoid use of null, just based on Java techniques we've learned so far? (Define I.. with "Unknown...";   constructor order.)
 
 ### Stage 6 - Abstraction, Class Hierarchies, and Exceptions
 
-#### Stage 6a
 Part 1
-- lift fields to abstract class,
-  and then methods of the IMedia hierarchy
+- lift fields to abstract class AbsMedia
+- (add a `year` field in the process)
+  and then lift methods of the IMedia hierarchy to AbsMedia
     - for buildPrice, ensure  price > 0 && ...
 
 Part 2
 - Demo JSONObject and JSONArray
-
 - introduce JSON objects instead of manually constructing strings   *****
- - IPrice change: Object toJSON();    -- talk about Object as superclass of everything (String and JSONObject)
-
-Extension 1: (after part 1)
-    - Implement ILoM.yearRange()
-    - Change ILoN.asJSONList  to return JSONArray,  get rid of ILoN.join
-
-    Exam question: Fix Range.toJSONString to use JSONObject and then .toString
-
-#### Stage 6b
+- add "info-line" to JSON
 
 Part 3
-- do year range (see extension for price range)
-- add year to info line
+ - Fix repercussions - In IPrice, ILoN, Author, etc.
+ - IPrice change: Object toJSON();    -- talk about Object as superclass of everything (String and JSONObject)
 
-Extension 3: (after part 3)
-    - price range  (Range class) 
-    - add star-icons to rating with JSONArray   --- see stage05.ext.Rating in omg-v1
+- Change ILOM::findItem to throw exception.
+Exception testing:
+		assertThrows(RuntimeException.class, () -> this.tardos.addBook(taocp2));
+
+
+Extensions:
+- Change ILoN.asJSONList  to return JSONArray,  
+        get rid of ILoN.join, get rid of ILoS.join
+
+- Implement ILoM.yearRange(), priceRange()  handlers
+    - add `yearRangeAsJSON`, `price...` to Store
+        server.installHandler("year-range", (RequestRangeHandler) store::yearRangeAsJSON);
+        server.installHandler("price-range", (RequestRangeHandler) store::priceRangeAsJSON);
+
+- add star-icons to rating with JSONArray   --- see stage05.ext.Rating in omg-v1
+
+Exam question: Fix Range.toJSONString to use JSONObject and then .toString
+
 
 
 ### Stage 7 - Abstracting Types (Generics)
@@ -273,6 +293,12 @@ Extension (not related to streams):
 - Stopping a program
 - See error # indicators on files in project explorer, or the "Problems" pane
 
+### Building JavaDoc
+
+```
+javadoc -d ../javadoc --class-path ../lib/omg-project.jar:. main media funcobjs
+```
+
 
 
 ### Extra Extensions
@@ -284,6 +310,3 @@ Extension (not related to streams):
 
 
 
-
-Exception testing:
-		assertThrows(RuntimeException.class, () -> this.tardos.addBook(taocp2));

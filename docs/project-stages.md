@@ -148,17 +148,26 @@ Exam question: Fix Range.toJSONString to use JSONObject and then .toString
 
 ### Stage 7 - Abstracting Types (Generics)
 
-- start with adding size() to ILoS
-
+Part A
 - ILo<T>    --- replace ILoS,ILoN       but discuss problems with ILoM ... see extension
-    - size, asJSONList(), contains(), removeAll() in ILo.
+    - size, asJSONList(), 
+    
+CLASSWORK - 
+    finish up contains(), removeAll(), append(), take() in ILo.
+    * provide test cases
+
+Part B
+- Change AbsMedia tags to ILo<String>, getTags() to ILo<String> return
+
+- Define ILo<String> split(...) in StringHelpers
+
 - make cart... ILo<Integer>    <---- talk about wrapper types
     - use asJSONList in ILo
 
 Extension:
-    implement tag tallying --- ListHelpers static method
+    implement tag tallying --- Store tagCounts() method with private helper tagTally()
 
-    - set up tests for stub in Store 
+    - set up tests for tagCounts() stub in Store 
 
     - add to ILo<T>
   	int count(T obj);

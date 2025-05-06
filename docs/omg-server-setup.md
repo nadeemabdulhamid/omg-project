@@ -48,14 +48,15 @@ private void setupServer(OMGServer server) {
 }
 ```
 
-An alternate approach to installing constructors is to simply provide the class. For this to work, each class must provide a constructor with a single `JSONObject` parameter, which can be used to extract data for initializing the fields of the constructed object.
-
-```
-    // register constructors for each item type
-    server.installConstructor("audio", AUDIO-ITEM-CLASS-NAME.class);
-    server.installConstructor("print", PRINT-ITEM-CLASS-NAME.class);
-    server.installConstructor("video", VIDEO-ITEM-CLASS-NAME.class);
-```
+> An alternate approach to installing constructors is to simply provide the class. For this to work, each class must provide a constructor with a single `JSONObject` parameter, which can be used to extract data for initializing the fields of the constructed object.
+> 
+> ```
+>     // register constructors for each item type
+>    server.installConstructor("audio", AUDIO-ITEM-CLASS-NAME.class);
+>    server.installConstructor("print", PRINT-ITEM-CLASS-NAME.class);
+>    server.installConstructor("video", VIDEO-ITEM-CLASS-NAME.class);
+>```
+>
 
 
 ## Summary of functional interface method signatures

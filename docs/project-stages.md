@@ -188,6 +188,9 @@ Extension:
     
 - Add to ILoM:
 
+    - abstract over "video", "print", etc. type constants in Audio, Book, Movie -- common field initialized through super call
+        - lift typeMatches' to abstract class , and move the type from toJSONString into AbsItem.
+
     - provide onlyPrint() after2000() --- abstract over them ---- IMediaPredicate => After2000Predicate, PrintPredicate
         ILoM -> filter(IMediaPredicate)
 
@@ -195,25 +198,32 @@ Extension:
         - Note that TypesPredicate just overrides standard library Predicate<T>
         ILoM -> filter(Predicate<IMedia>)
 
-    - then install TypesPredicate... and define overloaded Store::catalog(Predicate p),  also tagsCount(Predicate p, Search tagSearch) <-- implemeent filter for ILo
+    - then install TypesPredicate... and define overloaded Store::catalog(Predicate p),  
 
 - organize classes in subpackages (package/public)
 
-- abstract over "video", "print", etc. type constants in Audio, Book, Movie -- common field initialized through super call
-    - lift typeMatches' to abstract class , and move the type from toJSONString into AbsItem.
 
 Extension
-    - textsearch predicate  (make sure contains() uses toLowerCase)
-    - do min/max-price/year
-    - implement RequestRangeWithFilterHandler  for price-range, year-range
+    - tagsCount(Predicate p, Search tagSearch) <-- implemeent filter for ILo
 
-    Optional: 
-        - implement overloaded constructors for media that take JSONObject
+    - Additional predicates
+        - textsearch predicate  (make sure contains() uses toLowerCase)
+        - do min/max-price/year
+
+    - implement RequestRange*WithFilter*Handler  for price-range, year-range
+
+    - implement overloaded constructors for media that take JSONObject
 
 
 
 #### Aside: Visitor Design Pattern
 
+- collectIds()
+- findItem() --- with param
+
+Extension
+    - collectTags()
+    - range(IIntExtractor obj)
 
 
 ### Stage 9 - Built-in Lists
@@ -316,6 +326,13 @@ javadoc -d ../javadoc --class-path ../lib/omg-project.jar:. main media funcobjs
 - Allow multiple coupons
 - Support separate user carts (cookies)
 
+
+### Course Components
+
+- Performance Reviews
+- Debugging Challenges 
+- Coding Studio
+- Technical Quizzes
 
 
 

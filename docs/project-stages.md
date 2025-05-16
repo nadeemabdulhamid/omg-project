@@ -6,7 +6,11 @@ These do not necessarily correspond to individual lectures. More often they will
 
 ### Stage 0 - Setup and Welcome
 
+IDEA:
 
+***Use Github Classroom to distribute initial repos for all projects and activities.***
+
+---
 
 ### Stage 1 - Simple classes
 
@@ -228,10 +232,11 @@ Extension
 
 ### Stage 9 - Built-in Lists
 
+- `ListTestDemo.java`
+
 - Replace with List<...>
     - item tags: IMedia, AbsMedia, StringHelpers (use `new JSONArray(this.tags)` in AbsMedia), rewrite collectTags() with for-each loop
 
-                /// (already done stage 5- break itemInfoAsJSON - into findItem(id) and then .toJSONString() *******  <--- try/catch)
     - change Store::items to List<IMedia> --- rewrite to use  for-each loops and JSON objects
         - catalog(Predicate<IMedia> p), itemInfoAsJSON
         - temporarily put bogus predicate in Store::tagCounts()
@@ -243,10 +248,10 @@ Extension
 - loops
 
 - change AbsMedia constructor to take   List<String>   for tags, instead of splitting up on commas
-        - ***** change data file for list of tags
+        - ***** change  data file for list of tags
+            to "data/data-full.json"
 
-
-Extension:
+Extensions:
     - add "count" API handler
     - support "tags" predicate -- add hasAnyTag() to IMedia
     - rewrite star-icons in rating with loop 
@@ -326,13 +331,6 @@ javadoc -d ../javadoc --class-path ../lib/omg-project.jar:. main media funcobjs
 - Allow multiple coupons
 - Support separate user carts (cookies)
 
-
-### Course Components
-
-- Performance Reviews
-- Debugging Challenges 
-- Coding Studio
-- Technical Quizzes
 
 
 
